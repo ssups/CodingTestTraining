@@ -1,17 +1,17 @@
-import "math/big"
-
 func solution(n int) int64 {
-    if n == 1 {
+
+
+    if n == 1{
         return 1
-    }
-    if n == 2 {
+    }else if n == 2 {
         return 2
     }
-    
-    list := []*big.Int{big.NewInt(1), big.NewInt(2)}
-    for i := 2; i < n; i ++ {
-        list = append(list, new(big.Int).Add(list[i - 2], list[i - 1]))
+    trial := make([]int, n)
+    trial[0] = 1
+    trial[1] = 2
+    for i := 0 ; i < n -2 ;i++{
+        trial[i + 2] = (trial[i+1] + trial[i]) %1234567
     }
-    
-    return new(big.Int).Mod(list[len(list) - 1], big.NewInt(1234567)).Int64()
+
+    return int64(trial[n-1])
 }
